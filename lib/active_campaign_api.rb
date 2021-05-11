@@ -1,4 +1,4 @@
-require "active_campaign_api/version"
+require 'active_campaign_api/version'
 
 module ActiveCampaignApi
   class Error < StandardError; end
