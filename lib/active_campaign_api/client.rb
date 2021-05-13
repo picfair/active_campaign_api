@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'addressable'
+require 'json'
 
 module ActiveCampaignApi
   # Main ActiveCampaign API Client class

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
+require 'simplecov'
+SimpleCov.start
 require 'active_campaign_api'
 
 RSpec.configure do |config|
