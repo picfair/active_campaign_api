@@ -1,6 +1,4 @@
-require 'active_campaign_api/version'
+# frozen_string_literal: true
 
-module ActiveCampaignApi
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require 'active_campaign_api/version'
+require 'active_campaign_api/client'
