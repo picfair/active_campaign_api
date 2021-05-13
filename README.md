@@ -1,8 +1,8 @@
 # ActiveCampaignApi
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/active_campaign_api`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+There doesn't seem to be a ActiveCampaign SDK that works with
+V3 of the API.  This gem is very lightweight attempt at filling
+that gap.
 
 ## Installation
 
@@ -22,7 +22,46 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Initialize the client
+
+    client = ActiveCampaignApi::Client.new(
+      api_url: <http://Your-API-URL.api-us1.com/>,
+      api_key: <Your-api-key>,
+    )
+
+### GET Contacts and look at the result
+
+    # GET Contacts
+    result = client.get('contacts')
+    # => {"scoreValues"=>[], "contacts"=>[{...
+
+    # Count the contacts
+    result['contacts'].count
+    # => 4
+
+    # Look at their IDs
+    result['contacts'].map{|c| c['id']}
+    # => ["6", "1", "2", "15"]
+
+### GET a contact by id
+
+    # GET a specific contact
+    result = client.get('contacts/1')
+    # => {"contactAutomations"=>[], "contactLists"=>[], "deals"=>[], ...
+
+    result.keys
+    # => ["contactAutomations", "contactLists", "deals", "fieldValues", "geoIps", "accountContacts", "contact"]
+
+    result['contact']['email']
+    # => "hello@example.com"
+
+### UPDATE a contact
+
+    result = client.put('contacts/1', body: {contact: {email: 'hi@example.com'}})
+    # => {"contact"=>{"cdate"=>"2021-05-10T09:20:37-05:00", "email"=>"hi@example.com",
+
+    result = client.get('contacts/1')['contact']['email']
+
 
 ## Development
 
@@ -32,7 +71,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/active_campaign_api.
+Bug reports and pull requests are welcome on GitHub at https://github.com/picfair/active_campaign_api.
 
 ## License
 
